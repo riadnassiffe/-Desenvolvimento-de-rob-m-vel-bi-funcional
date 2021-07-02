@@ -1,0 +1,35 @@
+Deixo aqui algumas observações importantes para o professor tomar conhecimento
+
+- Sobre a comunicação
+
+--  Não consegui ainda fazer com que a conexão seja persistente entre Cliente e Servidor.
+    Dessa forma, após cada requesição o servidor fecha a conexão com o cliente o que implica
+    no fato do cliente ter que criar uma nova conexão com o Servidor toda vez que quiser
+    requesitar algum processamento.
+
+--  Uma implicação direta da questão anterior é o fato de não conseguir fazer com que o Servidor
+    envie dados (por exemplo dos sensores) sem que o Cliente solicite, sendo nesse momento
+    necessário que o cliente requesite explicitamente os dados.
+
+--  Para finalizar a discussão anterior, deixo aqui que estarei procurando para solucuinar
+    esse aspecto da comunicação, visando atingir o funcionamento discutido em nossa última reunião
+
+
+- Sobre o Circuito Utilizado
+
+--  Para testar o programa desenvolvido é necessário utilizar: 
+        Um Arduíno Yun;
+        Um Sensor Ultrassônico;
+        Um led;
+        Um resistor (para não ligar o Led diretamente com as saídas do arduino);
+
+--  Caso decida montar o circuito pare testes, favor usar as portas definidas pelo
+    códifo do Servidor, ou modificar o código com os dados do circuito montado por você
+
+
+- Alternativa para testar o Servidor
+
+--  É possível realizar as requesições via Navegador Web no mesmo sistema que o 
+    Cliente se comunica com o Servidor. Caso não queira usar o código do Cliente,
+    mas deseja ver o comportamento do servidor, essa é uma boa maneira de ter isso
+    feito.
