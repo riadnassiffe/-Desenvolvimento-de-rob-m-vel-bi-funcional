@@ -1,0 +1,52 @@
+CONFIGURAÇÃO TERMINADA				*
+configurarPinos				        Q			
+resetPinos					        R
+verificarPinoConfigurado			V
+configurarMotores				    M
+configurarSensorUltrassonico		U
+configurarLedSimples				S
+configurarLedRGB				    L
+configurarBuzzer				    Z
+configurarSensorFotoresistor		F
+configurarSensorOpticoReflexivo		O
+configurarPotenciometro			    P
+configurarPushButton				B
+configurarMPU					    X
+
+getVelocidade					    VG		
+setVelocidade					    VS
+
+andarParaFrente				        MF
+andarParaTras					    MT
+rotacionarParaDireita				MD
+rotacionarParaEsquerda				ME
+fazerCurva                          MC
+pararMotores					    MP
+
+ativarLed					        SA			
+ativarLedDelay					    ST
+inverterLed					        SI
+desativarLed					    SD
+
+ativarLedRGB					    LA
+ativarLedRGBDelay				    LT
+desativarLedRGB				        LD
+
+ativarBuzzer					    ZA
+ativarBuzzerDelay				    ZT
+desativarBuzzer				        ZD
+
+lerSensorUltrassonico				RU
+lerSensorFotoresistor				RF
+lerSensorOpticoReflexivo			RO
+lerPotenciometro				    RP
+lerBotao					        RB
+lerTemperatura					    RT
+lerAcelerometroX				    RA
+lerAcelerometroY				    RC
+lerAcelerometroZ				    RE
+lerGiroscopioX					    RG
+lerGiroscopioY					    RI
+lerGiroscopioZ					    RK
+
+encerrarComunicacao                 ER
