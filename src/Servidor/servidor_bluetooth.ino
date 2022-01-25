@@ -663,26 +663,26 @@ void pararMotores(){
 
 void ativarLed(){
 
-  // Verifica se os pinos requeridos para essa ação foram configurados
-  if (PIN_LED1 == 255 && PIN_LED2 == 255){
-    // Em caso de erro, notificar o cliente
-    dado_retorno.floatingPoint = erro0;
-    return; 
-  }
-
   // Leitura dos parâmetros do comando
   int n = bluetoothSerial.parseInt();
 
   // Identificação de qual Led deve ser acionado
-  if (n == 1)
+  if (n == 1 && PIN_LED1 != 255)
     // Acionamenrto do Led
     digitalWrite(PIN_LED1, HIGH);
   
-  else if (n == 2)
+  else if (n == 2 && PIN_LED2 != 255)
     digitalWrite(PIN_LED2, HIGH);
   
   else {
-    // Em caso de erro, notificar o cliente
+    // Verifica se os pinos requeridos para essa ação foram configurados
+    if ((PIN_LED1 == 255 || PIN_LED2 == 255) && (n == 1 || n == 2)){
+      // Em caso de erro, notificar o cliente
+      dado_retorno.floatingPoint = erro0;
+      return; 
+    }
+    
+    // Em caso de erro no valor de n, notificar o cliente
     dado_retorno.floatingPoint = erro1;
     return;
   }
@@ -694,19 +694,12 @@ void ativarLed(){
 
 void ativarLedDelay(){
   
-  // Verifica se os pinos requeridos para essa ação foram configurados
-  if (PIN_LED1 == 255 && PIN_LED2 == 255){
-    // Em caso de erro, notificar o cliente
-    dado_retorno.floatingPoint = erro0;
-    return; 
-  }
-  
   // Leitura dos parâmetros do comando
   int n = bluetoothSerial.parseInt();
   unsigned int tempo_atraso_ms = bluetoothSerial.parseInt();
 
   // Identificação de qual Led deve ser acionado
-  if (n == 1){
+  if (n == 1 && PIN_LED1 != 255){
     // Acionamenrto do Led
     digitalWrite(PIN_LED1, HIGH);
     // Acionamento do delay conforme parâmetro
@@ -715,14 +708,21 @@ void ativarLedDelay(){
     digitalWrite(PIN_LED1, LOW);
   }
   
-  else if (n == 2){
+  else if (n == 2 && PIN_LED2 != 255){
     digitalWrite(PIN_LED2, HIGH);
     delay(tempo_atraso_ms);
     digitalWrite(PIN_LED2, LOW);
   }
   
   else {
-    // Em caso de erro, notificar o cliente
+    // Verifica se os pinos requeridos para essa ação foram configurados
+    if ((PIN_LED1 == 255 || PIN_LED2 == 255) && (n == 1 || n == 2)){
+      // Em caso de erro, notificar o cliente
+      dado_retorno.floatingPoint = erro0;
+      return; 
+    }
+    
+    // Em caso de erro no valor de n, notificar o cliente
     dado_retorno.floatingPoint = erro1;
     return;
   }
@@ -734,26 +734,26 @@ void ativarLedDelay(){
 
 void inverterLed(){
   
-  // Verifica se os pinos requeridos para essa ação foram configurados
-  if (PIN_LED1 == 255 && PIN_LED2 == 255){
-    // Em caso de erro, notificar o cliente
-    dado_retorno.floatingPoint = erro0;
-    return; 
-  }
-  
   // Leitura dos parâmetros do comando
   int n = bluetoothSerial.parseInt();
 
   // Identificação de qual Led deve ser acionado
-  if (n == 1)
+  if (n == 1 && PIN_LED1 != 255)
     // Enviando sinal contrário ao atual para o led -> inverter seu estado
     digitalWrite(PIN_LED1, !digitalRead(PIN_LED1));
   
-  else if (n == 2)
+  else if (n == 2 && PIN_LED2 != 255)
     digitalWrite(PIN_LED2, !digitalRead(PIN_LED2));
   
   else {
-    // Em caso de erro, notificar o cliente
+    // Verifica se os pinos requeridos para essa ação foram configurados
+    if ((PIN_LED1 == 255 || PIN_LED2 == 255) && (n == 1 || n == 2)){
+      // Em caso de erro, notificar o cliente
+      dado_retorno.floatingPoint = erro0;
+      return; 
+    }
+    
+    // Em caso de erro no valor de n, notificar o cliente
     dado_retorno.floatingPoint = erro1;
     return;
   }
@@ -765,25 +765,25 @@ void inverterLed(){
 
 void desativarLed(){
 
-  // Verifica se os pinos requeridos para essa ação foram configurados
-  if (PIN_LED1 == 255 && PIN_LED2 == 255){
-    // Em caso de erro, notificar o cliente
-    dado_retorno.floatingPoint = erro0;
-    return; 
-  }
-
   // Leitura dos parâmetros do comando
   int n = bluetoothSerial.parseInt();
 
   // Identificação de qual Led deve ser desativado
-  if (n == 1)
+  if (n == 1 && PIN_LED1 != 255)
     digitalWrite(PIN_LED1, LOW);
   
-  else if (n == 2)
+  else if (n == 2 && PIN_LED2 != 255)
     digitalWrite(PIN_LED2, LOW);
   
   else {
-    // Em caso de erro, notificar o cliente
+    // Verifica se os pinos requeridos para essa ação foram configurados
+    if ((PIN_LED1 == 255 || PIN_LED2 == 255) && (n == 1 || n == 2)){
+      // Em caso de erro, notificar o cliente
+      dado_retorno.floatingPoint = erro0;
+      return; 
+    }
+    
+    // Em caso de erro no valor de n, notificar o cliente
     dado_retorno.floatingPoint = erro1;
     return;
   }
@@ -966,51 +966,55 @@ void lerSensorUltrassonico(){
 
 void lerSensorFotoresistor(){
 
-  // Verifica se os pinos requeridos para essa ação foram configurados
-  if (PIN_FR1 == 255 && PIN_FR2 == 255){
-    // Em caso de erro, notificar o cliente
-    dado_retorno.floatingPoint = erro0;
-    return;
-  }
-
   // Leitura dos parâmetros do comando
   int n = bluetoothSerial.parseInt();
 
   // Identificado qual sensor fotoresistor foi selecionado
-  if (n == 1)
+  if (n == 1 && PIN_FR1 != 255)
     // Configurando a variável com o dado de retorno do sensor para o servidor
     dado_retorno.floatingPoint = analogRead(PIN_FR1);
-  else if (n == 2)
+  else if (n == 2 && PIN_FR2 != 255)
     dado_retorno.floatingPoint = analogRead(PIN_FR2);
-  else
-    // Em caso de erro, notificar o cliente
+  else {
+    // Verifica se os pinos requeridos para essa ação foram configurados
+    if ((PIN_FR1 == 255 || PIN_FR2 == 255) && (n == 1 || n == 2)){
+      // Em caso de erro, notificar o cliente
+      dado_retorno.floatingPoint = erro0;
+      return; 
+    }
+    
+    // Em caso de erro no valor de n, notificar o cliente
     dado_retorno.floatingPoint = erro1;
+    return;
+  }
 
 }
 
 void lerSensorOpticoReflexivo(){
-
-  // Verifica se os pinos requeridos para essa ação foram configurados
-  if (PIN_OR1 == 255 && PIN_OR2 == 255){
-    // Em caso de erro, notificar o cliente
-    dado_retorno.floatingPoint = erro0;
-    return;
-  }
   
   // Leitura dos parâmetros do comando
   int n = bluetoothSerial.parseInt();
 
   // Identificando qual sensor óptico reflexivo foi selecionado
-  if (n == 1)
+  if (n == 1 && PIN_OR1 != 255)
     // Configurando a variável com o dado de retorno do sensor para o servidor
     dado_retorno.floatingPoint = digitalRead(PIN_OR1);
-  else if (n == 2)
+  else if (n == 2 && PIN_OR2 != 255)
     dado_retorno.floatingPoint = digitalRead(PIN_OR2);
-  else if (n == 3)
+  else if (n == 3 && PIN_OR3 != 255)
     dado_retorno.floatingPoint = digitalRead(PIN_OR3);
-  else
-    // Em caso de erro, notificar o cliente
+  else {
+    // Verifica se os pinos requeridos para essa ação foram configurados
+    if ((PIN_FR1 == 255 || PIN_FR2 == 255) && (n == 1 || n == 2)){
+      // Em caso de erro, notificar o cliente
+      dado_retorno.floatingPoint = erro0;
+      return; 
+    }
+    
+    // Em caso de erro no valor de n, notificar o cliente
     dado_retorno.floatingPoint = erro1;
+    return;
+  }
     
 }
 

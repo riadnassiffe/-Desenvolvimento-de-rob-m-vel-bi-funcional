@@ -62,10 +62,7 @@ class Cliente:
             Parâmetros:
                 mensagem - str - string que será enviada para o servidor
         '''
-        if (self.conectado):
-            self.socket.sendall(mensagem)
-        else:
-            raise ErroConexaoInexistente()
+        self.socket.sendall(mensagem)
 
     def get_resposta(self) -> float:
         '''
